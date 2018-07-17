@@ -20,4 +20,4 @@ Typescript + [GraphQL Yoga](https://github.com/prismagraphql/graphql-yoga)  + [T
 - [ ] 文章点赞
 - [ ] 文章CRUD
 - [ ] 评论CRUD
-- [ ] 防爆破
+- [x] 防爆破
