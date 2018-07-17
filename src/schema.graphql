@@ -2,6 +2,14 @@ directive @isAuthenticated on FIELD | FIELD_DEFINITION
 
 scalar Date
 
+type User {
+	id: Int
+	name: String
+	password: String
+	createdAt: Date
+	updateAt: Date
+}
+
 input AuthInput {
 	name: String
 	password: String
@@ -10,14 +18,6 @@ input AuthInput {
 type AuthPayLoad {
 	token: String
 	user: User
-}
-
-type User {
-	id: Int
-	name: String
-	password: String
-	createdAt: Date
-	updateAt: Date
 }
 
 type Query {
