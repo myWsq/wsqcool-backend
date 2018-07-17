@@ -101,11 +101,11 @@ INIT_PASSWORD='admin'
 @/src/resolvers/index.ts 递归处理resolvers/*.ts. 
 
 ```js
-var requireContext = require('require-context');
-var merge = require('deepmerge');
+import requireContext from 'require-context';
+import merge from 'deepmerge';
 const files = requireContext(__dirname, true, /\.ts$/);
 
-var module = {};
+let module = {};
 
 files.keys().forEach((key) => {
 	module = merge(module, files(key));
