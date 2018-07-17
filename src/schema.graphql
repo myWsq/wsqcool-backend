@@ -1,5 +1,7 @@
 directive @isAuthenticated on FIELD | FIELD_DEFINITION
 
+directive @rateLimit(times: Int, delta: Int) on FIELD | FIELD_DEFINITION
+
 scalar Date
 
 type User {
@@ -54,7 +56,7 @@ input PostsInput {
 }
 
 type Query {
-	me: User @isAuthenticated
+	me: User @isAuthenticated @rateLimit(times: 5, delta: 10)
 	posts(data: PostsInput): [Post!]!
 }
 
