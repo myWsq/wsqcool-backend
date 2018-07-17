@@ -1,6 +1,6 @@
 directive @isAuthenticated on FIELD | FIELD_DEFINITION
 
-directive @rateLimit(times: Int, delta: Int) on FIELD | FIELD_DEFINITION
+directive @rateLimit(times: Int, delta: Int, key: String) on FIELD | FIELD_DEFINITION
 
 scalar Date
 
@@ -56,11 +56,11 @@ input PostsInput {
 }
 
 type Query {
-	me: User @isAuthenticated @rateLimit(times: 5, delta: 10)
+	me: User @isAuthenticated
 	posts(data: PostsInput): [Post!]!
 }
 
 type Mutation {
-	login(data: AuthInput!): AuthPayLoad!
+	login(data: AuthInput!): AuthPayLoad! @rateLimit(times: 10, delta: 86400, key: "login1")  @rateLimit(times: 1, delta: 1, key: "login2")
 	userReset(data: AuthInput!): AuthPayLoad! @isAuthenticated
 }

@@ -2,10 +2,7 @@ import * as jwt from 'jsonwebtoken';
 import { ContextParameters } from '../node_modules/graphql-yoga/dist/types';
 import * as Gun from 'gun';
 
-export const gun = Gun({
-	// radisk: false,
-	// localStorage: false
-});
+export const gun = Gun();
 
 // 分页参数
 export interface Pagenation {
