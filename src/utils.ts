@@ -1,5 +1,13 @@
 import * as jwt from 'jsonwebtoken';
 import { ContextParameters } from '../node_modules/graphql-yoga/dist/types';
+import { BaseEntity } from '../node_modules/typeorm';
+
+// 分页参数
+export interface Pagenation {
+	skip?: number;
+	take?: number;
+}
+
 
 export function getUserId(ctx: ContextParameters) {
 	const Authorization = ctx.request.get('Authorization');

@@ -6,9 +6,9 @@ export default async () => {
 		type: 'postgres',
 		host: 'localhost',
 		port: 5432,
-		username: 'test',
-		password: 'test',
-		database: 'test',
+		username: 'wsq',
+		password: 'Wshuaiqi123',
+		database: 'wsq',
 		synchronize: true,
 		entities
 	});

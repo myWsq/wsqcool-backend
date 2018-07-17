@@ -3,28 +3,62 @@ directive @isAuthenticated on FIELD | FIELD_DEFINITION
 scalar Date
 
 type User {
-	id: Int
-	name: String
-	password: String
-	createdAt: Date
-	updateAt: Date
+	id: Int!
+	name: String!
+	password: String!
+	createdAt: Date!
+	updateAt: Date!
+}
+
+type Post {
+	id: Int!
+	title: String!
+	subTitle: String!
+	content: String!
+	views: Int!
+	likes: Int!
+	comments: [Comment!]!
+	createdAt: Date!
+	updateAt: Date!
+}
+
+type Comment {
+	id: Int!
+	content: String!
+	email: String!
+	host: String!
+	ip: String!
+	post: Post!
+}
+
+enum Order {
+	ASC
+	DESC
 }
 
 input AuthInput {
-	name: String
-	password: String
+	name: String!
+	password: String!
 }
 
 type AuthPayLoad {
-	token: String
-	user: User
+	token: String!
+	user: User!
+}
+
+input PostsInput {
+	skip: Int
+	take: Int
+	contain: String
+	order: Order
 }
 
 type Query {
 	me: User @isAuthenticated
+	posts(data: PostsInput): [Post!]!
 }
 
 type Mutation {
-	login(data: AuthInput!): AuthPayLoad
-	userReset(data: AuthInput!): AuthPayLoad @isAuthenticated
+	login(data: AuthInput!): AuthPayLoad!
+	userReset(data: AuthInput!): AuthPayLoad! @isAuthenticated
 }

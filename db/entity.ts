@@ -2,9 +2,11 @@ import {
 	BaseEntity,
 	PrimaryGeneratedColumn,
 	Column,
-	Entity,
 	CreateDateColumn,
-	UpdateDateColumn
+	UpdateDateColumn,
+	Entity,
+	ManyToOne,
+	OneToMany
 } from '../node_modules/typeorm';
 
 export abstract class Base extends BaseEntity {
@@ -20,4 +22,38 @@ export class User extends Base {
 	@Column() password: string;
 }
 
-export default [ User ];
+@Entity()
+export class Post extends Base {
+	@Column({ unique: true })
+	title: string;
+
+	@Column() subTitle: string;
+	@Column('text') content: string;
+
+	@Column({ default: 0 })
+	views: number;
+
+	@Column({ default: 0 })
+	likes: number;
+
+	@OneToMany((type) => Comment, (comment) => comment.post,)
+	comments: Comment[];
+}
+
+@Entity()
+export class Comment extends Base {
+	@Column({ type: 'text' })
+	content: string;
+
+	@Column() email: string;
+
+	@Column({ nullable: true })
+	host: string;
+
+	@Column() ip: string;
+
+	@ManyToOne((type) => Post, (post) => post.comments, { nullable: false, onDelete: 'CASCADE' })
+	post: Post;
+}
+
+export default [ User, Post, Comment ];
