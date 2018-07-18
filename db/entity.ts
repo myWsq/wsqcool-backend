@@ -23,6 +23,15 @@ export class User extends Base {
 }
 
 @Entity()
+export class Category extends Base {
+	@Column({ unique: true })
+	name: string;
+
+	@OneToMany((type) => Post, (post) => post.category)
+	posts: Post[];
+}
+
+@Entity()
 export class Post extends Base {
 	@Column({ unique: true })
 	title: string;
@@ -33,15 +42,17 @@ export class Post extends Base {
 	@Column({ default: 0 })
 	views: number;
 
-	@Column({ default: 0 })
-	likes: number;
-
-	@OneToMany((type) => Comment, (comment) => comment.post,)
+	@OneToMany((type) => Comment, (comment) => comment.post)
 	comments: Comment[];
+
+	@ManyToOne((type) => Category, (category) => category.posts)
+	category: Category;
 }
 
 @Entity()
 export class Comment extends Base {
+	@Column() name: string;
+
 	@Column({ type: 'text' })
 	content: string;
 
@@ -56,4 +67,4 @@ export class Comment extends Base {
 	post: Post;
 }
 
-export default [ User, Post, Comment ];
+export default [ User, Category, Post, Comment ];

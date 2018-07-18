@@ -12,20 +12,27 @@ type User {
 	updateAt: Date!
 }
 
+type Category {
+	id: Int!
+	name: String!
+	posts: [Post!]!
+}
+
 type Post {
 	id: Int!
 	title: String!
 	subTitle: String!
 	content: String!
 	views: Int!
-	likes: Int!
+	category: [String!]!
 	comments: [Comment!]!
-	createdAt: Date!
+	createdAt: Category!
 	updateAt: Date!
 }
 
 type Comment {
 	id: Int!
+	name: String!
 	content: String!
 	email: String!
 	host: String!
@@ -61,6 +68,8 @@ type Query {
 }
 
 type Mutation {
-	login(data: AuthInput!): AuthPayLoad! @rateLimit(times: 10, delta: 86400, key: "login1")  @rateLimit(times: 1, delta: 1, key: "login2")
+	login(data: AuthInput!): AuthPayLoad!
+		@rateLimit(times: 10, delta: 86400, key: "login1")
+		@rateLimit(times: 1, delta: 1, key: "login2")
 	userReset(data: AuthInput!): AuthPayLoad! @isAuthenticated
 }
