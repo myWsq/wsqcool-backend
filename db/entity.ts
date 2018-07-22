@@ -45,7 +45,7 @@ export class Post extends Base {
 	@OneToMany((type) => Comment, (comment) => comment.post)
 	comments: Comment[];
 
-	@ManyToOne((type) => Category, (category) => category.posts)
+	@ManyToOne((type) => Category, (category) => category.posts, { nullable: true, onDelete: 'SET NULL', eager: true })
 	category: Category;
 }
 

@@ -24,9 +24,9 @@ type Post {
 	subTitle: String!
 	content: String!
 	views: Int!
-	category: [String!]!
+	category: Category
 	comments: [Comment!]!
-	createdAt: Category!
+	createdAt: Date!
 	updateAt: Date!
 }
 
@@ -62,9 +62,26 @@ input PostsInput {
 	order: Order
 }
 
+input CreatePostInput {
+	title: String!
+	subTitle: String!
+	content: String!
+	category: String # 自动创建分类标签
+}
+
+input UpdatePostInput {
+	id: Int!
+	title: String
+	subTitle: String
+	content: String
+	category: String # 自动创建分类标签
+}
+
 type Query {
 	me: User @isAuthenticated
+	# Post
 	posts(data: PostsInput): [Post!]!
+	post(id: Int!): Post
 }
 
 type Mutation {
@@ -72,4 +89,8 @@ type Mutation {
 		@rateLimit(times: 10, delta: 86400, key: "login1")
 		@rateLimit(times: 1, delta: 1, key: "login2")
 	userReset(data: AuthInput!): AuthPayLoad! @isAuthenticated
+	# Post
+	createPost(data: CreatePostInput!): Post! @isAuthenticated
+	deletePost(id: Int!): Int! @isAuthenticated
+	updatePost(data: UpdatePostInput!): Post! @isAuthenticated
 }

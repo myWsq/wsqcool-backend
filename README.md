@@ -18,7 +18,7 @@ Typescript + [GraphQL Yoga](https://github.com/prismagraphql/graphql-yoga)  + [T
 - [x] 鉴权系统(登录, 重置)
 - [x] 文章获取(全文搜索, 排序, 分页)
 - [ ] ~~文章点赞~~
-- [ ] 文章分类
-- [ ] 文章CUD
+- [x] 文章分类
+- [x] 文章CUD
 - [ ] 评论CRUD
 - [x] 防爆破
