@@ -14,7 +14,10 @@ export const rateLimit = async (
 	args: { times: number; delta: number; key: string },
 	ctx: ContextParameters
 ) => {
-	console.log(args.key);
+	// 忽略管理员操作
+	if (getUserId(ctx) && (await User.findOne(getUserId(ctx)))) {
+		return next();
+	}
 	const user = gun.get('ipPool').get(getUserIp(ctx)).get(args.key);
 	const curTimes = user.get('times');
 	const curTimesData = (await getOnce(curTimes)) || 0;

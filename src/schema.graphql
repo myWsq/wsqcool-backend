@@ -35,9 +35,8 @@ type Comment {
 	name: String!
 	content: String!
 	email: String!
-	host: String!
+	host: String
 	ip: String!
-	post: Post!
 }
 
 enum Order {
@@ -77,11 +76,20 @@ input UpdatePostInput {
 	category: String # 自动创建分类标签
 }
 
+input CreateCommentInput {
+	postId: Int!
+	name: String!
+	content: String!
+	email: String!
+	host: String
+}
+
 type Query {
 	me: User @isAuthenticated
 	# Post
 	posts(data: PostsInput): [Post!]!
 	post(id: Int!): Post
+	comments(postId: Int!): [Comment!]!
 }
 
 type Mutation {
@@ -93,4 +101,9 @@ type Mutation {
 	createPost(data: CreatePostInput!): Post! @isAuthenticated
 	deletePost(id: Int!): Int! @isAuthenticated
 	updatePost(data: UpdatePostInput!): Post! @isAuthenticated
+	# Comment
+	createComment(data: CreateCommentInput!): Comment!
+		@rateLimit(times: 1, delta: 20, key: "comment1")
+		@rateLimit(times: 5, delta: 86400, key: "comment2")
+	deleteComments(ids: [Int!]!): Int! @isAuthenticated
 }

@@ -17,8 +17,7 @@ export const getUserId = (ctx: ContextParameters) => {
 		const { id } = jwt.verify(token, process.env.APP_SECRET) as { id: string };
 		return id;
 	}
-
-	throw new AuthError();
+	return null;
 };
 
 export class AuthError extends Error {

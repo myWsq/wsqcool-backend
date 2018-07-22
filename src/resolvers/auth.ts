@@ -9,7 +9,7 @@ interface AuthInput {
 }
 
 export const Query = {
-	async me(p_, $, ctx) {
+	async me(_, $, ctx) {
 		return await User.findOne(getUserId(ctx));
 	}
 };
