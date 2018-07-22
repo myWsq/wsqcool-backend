@@ -1,9 +1,10 @@
 import * as jwt from 'jsonwebtoken';
 import { ContextParameters } from '../node_modules/graphql-yoga/dist/types';
 import * as Gun from 'gun';
+import { PubSub } from '../node_modules/graphql-yoga';
 
 export const gun = Gun();
-
+export const pubsub = new PubSub();
 // 分页参数
 export interface Pagenation {
 	skip?: number;
@@ -35,7 +36,7 @@ export const getUserIp = (ctx: ContextParameters) => {
 // 转化为promise
 export const getOnce = (gunIns: any) => {
 	return new Promise<any>((resolve, reject) => {
-		gunIns.once((data) => {
+		gunIns.once((data, key) => {
 			resolve(data);
 		});
 	});

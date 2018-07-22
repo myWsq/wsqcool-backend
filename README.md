@@ -22,4 +22,9 @@ Typescript + [GraphQL Yoga](https://github.com/prismagraphql/graphql-yoga)  + [T
 - [x] 文章分类
 - [x] 文章CUD
 - [x] 评论CRD
-- [ ] 评论订阅
+- [x] 评论通知
+- [ ] 评论通知删除
+
+## 遇到的问题
+
+1. Gun的文档很糟糕, 删除节点没有明确的方法

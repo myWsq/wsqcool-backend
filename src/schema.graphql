@@ -84,12 +84,23 @@ input CreateCommentInput {
 	host: String
 }
 
+type Notification {
+	id: String!
+	title: String!
+	content: String!
+	category: String!
+	time: String!
+}
+
 type Query {
 	me: User @isAuthenticated
 	# Post
 	posts(data: PostsInput): [Post!]!
 	post(id: Int!): Post
+	# Comment
 	comments(postId: Int!): [Comment!]!
+	# Notication
+	notifications: [Notification!]!
 }
 
 type Mutation {
@@ -106,4 +117,11 @@ type Mutation {
 		@rateLimit(times: 1, delta: 20, key: "comment1")
 		@rateLimit(times: 5, delta: 86400, key: "comment2")
 	deleteComments(ids: [Int!]!): Int! @isAuthenticated
+	# Notication
+	deleteNotification(id: String!): Boolean
+	clearNotification: Boolean
+}
+
+type Subscription {
+	notification: Notification!
 }
