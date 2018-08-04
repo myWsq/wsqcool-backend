@@ -1,10 +1,8 @@
 {
   "name": "test",
   "scripts": {
-    "start": "dotenv -- nodemon -e ts,graphql -x ts-node src/index.ts",
-    "dev": "npm-run-all --parallel start playground",
-    "debug": "dotenv -- nodemon -e ts,graphql -x ts-node --inspect src/index.ts",
-    "playground": "graphql playground"
+    "start": "cross-env NODE_ENV=production GUN_ENV=production  dotenv -- nodemon -e ts,graphql -x ts-node src/index.ts",
+    "dev": "dotenv -- nodemon -e ts,graphql -x ts-node src/index.ts"
   },
   "dependencies": {
     "@types/shortid": "^0.0.29",
@@ -21,6 +19,7 @@
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.1",
+    "cross-env": "^5.2.0",
     "deepmerge": "^2.1.1",
     "dotenv-cli": "^1.4.0",
     "graphql-cli": "2.16.4",

@@ -1,6 +1,7 @@
 import { ContextParameters } from '../node_modules/graphql-yoga/dist/types';
-import { AuthError, getUserId, getUserIp, gun, getOnce } from './utils';
+import { AuthError, getUserId, getUserIp, gun } from './utils';
 import { User } from '../db/entity';
+import 'gun/lib/then.js'
 export const isAuthenticated = async (next, _, __, ctx: ContextParameters) => {
 	const hasUser = getUserId(ctx) && (await User.findOne(getUserId(ctx)));
 	if (hasUser) return next();
@@ -20,9 +21,9 @@ export const rateLimit = async (
 	}
 	const user = gun.get('ipPool').get(getUserIp(ctx)).get(args.key);
 	const curTimes = user.get('times');
-	const curTimesData = (await getOnce(curTimes)) || 0;
+	const curTimesData = (await curTimes.then()) || 0;
 	const curDelta = user.get('delta');
-	const curDeltaData = (await getOnce(curDelta)) || 0;
+	const curDeltaData = (await curDelta.then()) || 0;
 	const now = Math.floor(new Date().getTime() / 1000);
 	if (now - curDeltaData > args.delta) {
 		curDelta.put(now);

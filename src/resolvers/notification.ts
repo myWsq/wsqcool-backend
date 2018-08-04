@@ -1,4 +1,4 @@
-import { pubsub, gun, getOnce } from '../utils';
+import { pubsub, gun } from '../utils';
 import 'gun/lib/then';
 import 'gun/lib/unset.js';
 export interface Notification {
@@ -12,16 +12,18 @@ export interface Notification {
 export const Query = {
 	async notifications() {
 		let tmp = [];
-		await gun
-			.get('notification')
-			.map()
-			.on((data: Notification) => {
-				console.log(data);
-				if (data) {
-					tmp.push(data);
-				}
-			})
-			.then();
+		if (await gun.get('notification').then()) {
+			await gun
+				.get('notification')
+				.map()
+				.on((data: Notification) => {
+					console.log(data);
+					if (data) {
+						tmp.push(data);
+					}
+				})
+				.then();
+		}
 		return tmp;
 	}
 };
@@ -37,11 +39,15 @@ export const Mutation = {
 	},
 	async clearNotification() {
 		// 手动置空
-		await gun.get('notification').map().on(async (data,k) => {
-			if(data){
-				await gun.get('notification').get(k).put(null).then()
-			}
-		}).then();
+		await gun
+			.get('notification')
+			.map()
+			.on(async (data, k) => {
+				if (data) {
+					await gun.get('notification').get(k).put(null).then();
+				}
+			})
+			.then();
 		return;
 	}
 };
