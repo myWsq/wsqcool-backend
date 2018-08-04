@@ -23,7 +23,7 @@ Typescript + [GraphQL Yoga](https://github.com/prismagraphql/graphql-yoga)  + [T
 - [x] 文章CUD
 - [x] 评论CRD
 - [x] 评论通知
-- [ ] 评论通知删除
+- [x] 评论通知删除
 
 ## 遇到的问题
 
