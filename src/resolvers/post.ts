@@ -1,6 +1,5 @@
 import { Post, Category } from '../../db/entity';
 import { Pagenation } from '../utils';
-import { GraphQLResolveInfo } from '../../node_modules/@types/graphql';
 
 interface PostsInput {
 	contain?: string;

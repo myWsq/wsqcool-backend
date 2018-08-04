@@ -15,7 +15,7 @@ const server = new GraphQLServer({
 	}
 });
 
-server.start(async (options) => {
+server.start({ endpoint: '/graphql' }, async (options) => {
 	console.log(`服务器初始化完毕🎉`);
 	await Orm();
 	const name = process.env.INIT_NAME || 'admin';
@@ -25,8 +25,8 @@ server.start(async (options) => {
 	admin.password = hashSync(password);
 	await admin.save();
 	console.log(
-		`数据库初始化成功🎉 初始用户名:${name}, 密码:${password} \n服务器运行在 http://localhost${options.endpoint === '/'
-			? ''
-			: options.endpoint}:${options.port}`
+		`数据库初始化成功🎉 初始用户名:${name}, 密码:${password} \n服务器运行在 http://localhost:${options.port}${options.endpoint === '/'
+		? ''
+		: options.endpoint}`
 	);
 });

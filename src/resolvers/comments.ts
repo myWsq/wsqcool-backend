@@ -43,13 +43,13 @@ export const Mutation = {
 			id: shortid.generate(),
 			title: `${comment.name} 发表了对文章《${post.title}》的评论`,
 			content: comment.content,
-			category: 'COMMENT',
+			category: '新的评论',
 			time: comment.createdAt.toJSON()
 		};
 		// 存入通知列表
 		gun.get('notification').get(notification.id).put(notification);
 		// 发布订阅
-		pubsub.publish('NOTIFICATION', { notification });
+		pubsub.publish('notification', { notification });
 		return comment;
 	},
 	async deleteComments(_, args: { ids: number[] }) {
