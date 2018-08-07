@@ -1,0 +1,128 @@
+directive @isAuthenticated on FIELD | FIELD_DEFINITION
+
+directive @rateLimit(times: Int, delta: Int, key: String) on FIELD | FIELD_DEFINITION
+
+scalar Date
+
+type User {
+	id: Int!
+	name: String!
+	password: String!
+	createdAt: Date!
+	updateAt: Date!
+}
+
+type Category {
+	id: Int!
+	name: String!
+	posts: [Post!]!
+}
+
+type Post {
+	id: Int!
+	title: String!
+	subTitle: String!
+	content: String!
+	views: Int!
+	category: Category
+	comments: [Comment!]!
+	createdAt: Date!
+	updateAt: Date!
+}
+
+type Comment {
+	id: Int!
+	name: String!
+	content: String!
+	email: String!
+	host: String
+	ip: String!
+}
+
+enum Order {
+	ASC
+	DESC
+}
+
+input AuthInput {
+	name: String!
+	password: String!
+}
+
+type AuthPayLoad {
+	token: String!
+	user: User!
+}
+
+input PostsInput {
+	skip: Int
+	take: Int
+	contain: String
+	order: Order
+}
+
+input CreatePostInput {
+	title: String!
+	subTitle: String!
+	content: String!
+	category: String # 自动创建分类标签
+}
+
+input UpdatePostInput {
+	id: Int!
+	title: String
+	subTitle: String
+	content: String
+	category: String # 自动创建分类标签
+}
+
+input CreateCommentInput {
+	postId: Int!
+	name: String!
+	content: String!
+	email: String!
+	host: String
+}
+
+type Notification {
+	id: String!
+	title: String!
+	content: String!
+	category: String!
+	time: String!
+}
+
+type Query {
+	me: User @isAuthenticated
+	# Post
+	posts(data: PostsInput): [Post!]!
+	post(id: Int!): Post
+	# Comment
+	comments(postId: Int!): [Comment!]!
+	# Notication
+	notifications: [Notification!]!
+}
+
+type Mutation {
+	login(data: AuthInput!): AuthPayLoad!
+		@rateLimit(times: 10, delta: 86400, key: "login1")
+		@rateLimit(times: 1, delta: 1, key: "login2")
+		
+	userReset(data: AuthInput!): AuthPayLoad! @isAuthenticated
+	# Post
+	createPost(data: CreatePostInput!): Post! @isAuthenticated
+	deletePost(id: Int!): Int! @isAuthenticated
+	updatePost(data: UpdatePostInput!): Post! @isAuthenticated
+	# Comment
+	createComment(data: CreateCommentInput!): Comment!
+		@rateLimit(times: 1, delta: 20, key: "comment1")
+		@rateLimit(times: 5, delta: 86400, key: "comment2")
+	deleteComments(ids: [Int!]!): Int! @isAuthenticated
+	# Notication
+	deleteNotification(id: String!): Boolean @isAuthenticated
+	clearNotification: Boolean @isAuthenticated
+}
+
+type Subscription {
+	notification: Notification! 
+}
