@@ -14,8 +14,8 @@ const server = new GraphQLServer({
 		return { ...req };
 	}
 });
-
-server.start({ endpoint: '/graphql',subscriptions:'/graphql'}, async (options) => {
+server.use('/', require('express').static('src/pages'));
+server.start({ endpoint: '/graphql', subscriptions: '/graphql', playground: false }, async (options) => {
 	console.log(`服务器初始化完毕🎉`);
 	await Orm();
 	const name = process.env.INIT_NAME || 'admin';
@@ -26,7 +26,7 @@ server.start({ endpoint: '/graphql',subscriptions:'/graphql'}, async (options) =
 	await admin.save();
 	console.log(
 		`数据库初始化成功🎉 初始用户名:${name}, 密码:${password} \n服务器运行在 http://localhost:${options.port}${options.endpoint === '/'
-		? ''
-		: options.endpoint}`
+			? ''
+			: options.endpoint}`
 	);
 });

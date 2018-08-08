@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="81px" height="69px" viewBox="0 0 81 69" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49.3 (51167) - http://www.bohemiancoding.com/sketch -->
+    <title>logo admin</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="logo-admin" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="Rectangle-2" fill="#448AFF" x="16" y="16" width="51" height="38" rx="3"></rect>
+        <rect id="Rectangle" stroke="#4A4A4A" stroke-width="3" x="9.5" y="9.5" width="63" height="50" rx="4"></rect>
+        <polyline id="Path-2" stroke="#4A4A4A" stroke-width="3" points="13.0822663 3 2 3 2 14.8336418"></polyline>
+        <polyline id="Path-2-Copy" stroke="#4A4A4A" stroke-width="3" transform="translate(73.541133, 7.916821) scale(-1, 1) translate(-73.541133, -7.916821) " points="79.0822663 2 68 2 68 13.8336418"></polyline>
+        <polyline id="Path-2-Copy-2" stroke="#4A4A4A" stroke-width="3" transform="translate(73.541133, 60.916821) scale(-1, -1) translate(-73.541133, -60.916821) " points="79.0822663 55 68 55 68 66.8336418"></polyline>
+        <polyline id="Path-2" stroke="#4A4A4A" stroke-width="3" transform="translate(8.015200, 60.916821) scale(1, -1) translate(-8.015200, -60.916821) " points="13.5563335 55 2.47406724 55 2.47406724 66.8336418"></polyline>
+        <path d="M48,47 L62.8380177,47" id="Path-4" stroke="#FFFFFF" stroke-width="3"></path>
+        <path d="" id="Path-3" stroke="#979797"></path>
+        <polyline id="Path-5" stroke="#FFFFFF" stroke-width="3" points="21 22 42 35.6444727 22.9837962 48"></polyline>
+    </g>
+</svg>

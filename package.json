@@ -1,5 +1,5 @@
 {
-  "name": "test",
+  "name": "wsqcool-backend",
   "scripts": {
     "start": "cross-env NODE_ENV=production GUN_ENV=production  dotenv -- nodemon -e ts,graphql -x ts-node src/index.ts",
     "dev": "dotenv -- nodemon -e ts,graphql -x ts-node src/index.ts"
