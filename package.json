@@ -6,6 +6,7 @@
   },
   "dependencies": {
     "@types/shortid": "^0.0.29",
+    "@types/validator": "^9.4.1",
     "bcryptjs": "^2.4.3",
     "graphql-import": "0.6.0",
     "graphql-yoga": "1.14.12",
@@ -15,7 +16,8 @@
     "reflect-metadata": "^0.1.12",
     "require-context": "^1.1.0",
     "shortid": "^2.2.12",
-    "typeorm": "^0.2.7"
+    "typeorm": "^0.2.7",
+    "validator": "^10.5.0"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.1",

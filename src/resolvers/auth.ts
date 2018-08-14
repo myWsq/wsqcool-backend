@@ -2,6 +2,7 @@ import { getUserId } from '../utils';
 import { User } from '../../db/entity';
 import * as jwt from 'jsonwebtoken';
 import { hashSync, compareSync } from 'bcryptjs';
+import * as validator from 'validator';
 
 interface AuthInput {
 	name: string;
@@ -27,8 +28,15 @@ export const Mutation = {
 	},
 	async userReset(_, args: { data: AuthInput }, ctx) {
 		const user = await User.findOne(getUserId(ctx));
-		user.name = args.data.name;
-		user.password = hashSync(args.data.password);
+		console.log(args.data);
+
+		if (args.data.name && args.data.name.length > 0) {
+			
+			user.name = args.data.name;
+		}
+		if (args.data.password && args.data.password.length > 0) {
+			user.password = hashSync(args.data.password);
+		}
 		return await user.save();
 	}
 };

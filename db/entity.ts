@@ -17,7 +17,7 @@ export abstract class Base extends BaseEntity {
 
 @Entity()
 export class User extends Base {
-	@Column({ unique: true })
+	@Column({ unique: true,type:String })
 	name: string;
 	@Column() password: string;
 }

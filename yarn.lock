@@ -123,6 +123,10 @@
   version "0.0.29"
   resolved "http://registry.npm.taobao.org/@types/shortid/download/@types/shortid-0.0.29.tgz#8093ee0416a6e2bf2aa6338109114b3fbffa0e9b"
 
+"@types/validator@^9.4.1":
+  version "9.4.1"
+  resolved "http://registry.npm.taobao.org/@types/validator/download/@types/validator-9.4.1.tgz#bea5a290e61f1cbf12af3fd878706aeec2ba0087"
+
 "@types/zen-observable@^0.5.3":
   version "0.5.4"
   resolved "https://registry.yarnpkg.com/@types/zen-observable/-/zen-observable-0.5.4.tgz#b863a4191e525206819e008097ebf0fb2e3a1cdc"
@@ -4182,6 +4186,10 @@ validate-npm-package-license@^3.0.1:
 validator@^10.0.0:
   version "10.3.0"
   resolved "https://registry.yarnpkg.com/validator/-/validator-10.3.0.tgz#157a8c0981858cff381f59aabcdb8f83b57317cc"
+
+validator@^10.5.0:
+  version "10.5.0"
+  resolved "http://registry.npm.taobao.org/validator/download/validator-10.5.0.tgz#1debbe1e6f5fd0c920ed2af47516f3762033939c"
 
 vary@^1, vary@~1.1.2:
   version "1.1.2"

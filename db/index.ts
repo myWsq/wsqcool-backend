@@ -4,11 +4,11 @@ import entities from './entity';
 export default async () => {
 	await createConnection({
 		type: 'postgres',
-		host: '159.65.66.21',
+		host: '101.200.48.1',
 		port: 5432,
-		username: 'wsq',
-		password: 'wsq123',
-		database: 'wsq',
+		username: 'test',
+		password: 'test',
+		database: 'test',
 		synchronize: true,
 		entities
 	});
