@@ -7,4 +7,4 @@
 server.use('/', require('express').static('src/pages'));
 ```
 
-具体细节refer to (wsq.cool-admin)[https://github.com/myWsq/wsqcool-admin]
+具体细节refer to [wsq.cool-admin](https://github.com/myWsq/wsqcool-admin)
