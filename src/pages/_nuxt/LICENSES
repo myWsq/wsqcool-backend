@@ -318,8 +318,6 @@
 
 /*! ../VIcon */
 
-/*! ../../mixins/bootable */
-
 /*! ../../mixins/themeable */
 
 /*! ../../mixins/registrable */
@@ -1344,6 +1342,8 @@
 
 /*! ../../mixins/themeable */
 
+/*! ../../mixins/selectable */
+
 /*! ../../mixins/registrable */
 
 /*! ../../util/helpers */
@@ -1956,6 +1956,8 @@
 
 /*! exports provided: checkVueVersion, default */
 
+/*! vue */
+
 /*! ./mixins/application */
 
 /*! ./mixins/breakpoint */
@@ -1968,9 +1970,9 @@
 
 /*! ./mixins/lang */
 
-/*! ../../util/console */
-
 /*! ./util/goTo */
+
+/*! ../../util/console */
 
 /*!******************************************************!*\
   !*** ./src/components/Vuetify/mixins/application.ts ***!
