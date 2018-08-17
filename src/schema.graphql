@@ -39,6 +39,15 @@ type Comment {
 	ip: String!
 }
 
+type Info {
+	id: Int!
+	name: String!
+	avatar: String!
+	github: String!
+	email: String!
+	description: String!
+}
+
 enum Order {
 	ASC
 	DESC
@@ -81,7 +90,15 @@ input CreateCommentInput {
 	name: String!
 	content: String!
 	email: String!
-	host: String
+	host: String!
+}
+
+input UpdateInfoInput {
+	name: String
+	avatar: String
+	github: String
+	email: String
+	description: String
 }
 
 type Notification {
@@ -101,13 +118,14 @@ type Query {
 	comments(postId: Int!): [Comment!]!
 	# Notication
 	notifications: [Notification!]!
+	# Info
+	info: Info
 }
 
 type Mutation {
 	login(data: AuthInput!): AuthPayLoad!
 		@rateLimit(times: 10, delta: 86400, key: "login1")
 		@rateLimit(times: 1, delta: 1, key: "login2")
-		
 	userReset(data: AuthInput!): AuthPayLoad! @isAuthenticated
 	# Post
 	createPost(data: CreatePostInput!): Post! @isAuthenticated
@@ -121,8 +139,10 @@ type Mutation {
 	# Notication
 	deleteNotification(id: String!): Boolean @isAuthenticated
 	clearNotification: Boolean @isAuthenticated
+	# Info
+	updateInfo(data: UpdateInfoInput!): Info! @isAuthenticated
 }
 
 type Subscription {
-	notification: Notification! 
+	notification: Notification!
 }
