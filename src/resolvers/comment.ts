@@ -10,6 +10,9 @@ export const Query = {
 			throw Error('文章不存在');
 		}
 		return await Comment.find({ post });
+	},
+	async comment(_, args: { id: number }) {
+		return await Post.findOne(args.id);
 	}
 };
 

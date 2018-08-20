@@ -4,6 +4,11 @@ directive @rateLimit(times: Int, delta: Int, key: String) on FIELD | FIELD_DEFIN
 
 scalar Date
 
+enum Order {
+	ASC
+	DESC
+}
+
 type User {
 	id: Int!
 	name: String!
@@ -37,6 +42,18 @@ type Comment {
 	email: String!
 	host: String
 	ip: String!
+	post: Post!
+	createdAt: Date!
+}
+
+type Message {
+	id: Int!
+	name: String!
+	content: String!
+	email: String!
+	host: String
+	ip: String!
+	createdAt: Date!
 }
 
 type Info {
@@ -48,9 +65,24 @@ type Info {
 	description: String!
 }
 
-enum Order {
-	ASC
-	DESC
+type AuthPayLoad {
+	token: String!
+	user: User!
+}
+
+type OssPayLoad {
+	accessKeyId: String!
+	accessKeySecret: String!
+	region: String!
+	bucket: String!
+}
+
+type Notification {
+	id: String!
+	title: String!
+	content: String!
+	category: String!
+	time: String!
 }
 
 input AuthInput {
@@ -58,15 +90,16 @@ input AuthInput {
 	password: String!
 }
 
-type AuthPayLoad {
-	token: String!
-	user: User!
-}
-
 input PostsInput {
 	skip: Int
 	take: Int
 	contain: String
+	order: Order
+}
+
+input MessageInput {
+	skip: Int
+	take: Int
 	order: Order
 }
 
@@ -90,7 +123,14 @@ input CreateCommentInput {
 	name: String!
 	content: String!
 	email: String!
-	host: String!
+	host: String
+}
+
+input CreateMessageInput {
+	name: String!
+	content: String!
+	email: String!
+	host: String
 }
 
 input UpdateInfoInput {
@@ -101,21 +141,18 @@ input UpdateInfoInput {
 	description: String
 }
 
-type Notification {
-	id: String!
-	title: String!
-	content: String!
-	category: String!
-	time: String!
-}
-
 type Query {
 	me: User @isAuthenticated
+	oss: OssPayLoad @isAuthenticated
 	# Post
 	posts(data: PostsInput): [Post!]!
 	post(id: Int!): Post
 	# Comment
 	comments(postId: Int!): [Comment!]!
+	comment(id: Int!): Comment
+	# Message
+	messages(data: MessageInput): [Message!]!
+	message(id: Int!): Message
 	# Notication
 	notifications: [Notification!]!
 	# Info
@@ -136,6 +173,11 @@ type Mutation {
 		@rateLimit(times: 1, delta: 20, key: "comment1")
 		@rateLimit(times: 5, delta: 86400, key: "comment2")
 	deleteComments(ids: [Int!]!): Int! @isAuthenticated
+	# Message
+	createMessage(data: CreateMessageInput!): Message!
+		@rateLimit(times: 1, delta: 20, key: "message1")
+		@rateLimit(times: 5, delta: 86400, key: "message2")
+	deleteMessages(ids: [Int!]!): Int! @isAuthenticated
 	# Notication
 	deleteNotification(id: String!): Boolean @isAuthenticated
 	clearNotification: Boolean @isAuthenticated

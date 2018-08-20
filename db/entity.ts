@@ -42,7 +42,7 @@ export class Post extends Base {
 	@Column({ default: 0 })
 	views: number;
 
-	@OneToMany((type) => Comment, (comment) => comment.post)
+	@OneToMany((type) => Comment, (comment) => comment.post, { eager: true })
 	comments: Comment[];
 
 	@ManyToOne((type) => Category, (category) => category.posts, { nullable: true, onDelete: 'SET NULL', eager: true })

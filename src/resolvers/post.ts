@@ -10,7 +10,7 @@ export const Query = {
 	async posts(_, args: { data?: Pagenation & PostsInput }, ctx) {
 		// 需要搜索
 		if (args.data && args.data.contain) {
-			return await Post.createQueryBuilder('post')
+			return await Post.createQueryBuilder()
 				.where('post.title like :keyword')
 				.orWhere('post.subTitle like :keyword')
 				.orWhere('post.Content like :keyword')

@@ -9,9 +9,32 @@ interface AuthInput {
 	password: string;
 }
 
+interface OssPayLoad {
+	accessKeyId: string;
+	accessKeySecret: string;
+	region: string;
+	bucket: string;
+}
+
 export const Query = {
 	async me(_, $, ctx) {
 		return await User.findOne(getUserId(ctx));
+	},
+	oss() {
+		const res: OssPayLoad = {
+			accessKeyId: process.env.OSS_ACCESS_KEY_ID,
+			accessKeySecret: process.env.OSS_ACCESS_KEY_SECRET,
+			region: process.env.OSS_REGION,
+			bucket: process.env.OSS_BUCKET
+		};
+		for (let k in res) {
+			console.log(process.env);
+			
+			if (!res[k]) {
+				throw Error('OSS配置无效,请检查配置信息');
+			}
+		}
+		return res;
 	}
 };
 
@@ -31,7 +54,6 @@ export const Mutation = {
 		console.log(args.data);
 
 		if (args.data.name && args.data.name.length > 0) {
-			
 			user.name = args.data.name;
 		}
 		if (args.data.password && args.data.password.length > 0) {
