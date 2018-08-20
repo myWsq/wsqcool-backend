@@ -16,11 +16,15 @@ interface MessageInput {
 
 export const Query = {
 	async messages(_, args: { data: Pagenation & MsgInput }) {
-		return await Message.find({
-			order: { createdAt: args.data.order },
-			take: args.data.take,
-			skip: args.data.skip
-		});
+		if (!args.data) {
+			return Message.find();
+		} else {
+			return await Message.find({
+				order: { createdAt: args.data.order },
+				take: args.data.take,
+				skip: args.data.skip
+			});
+		}
 	},
 	async message(_, args: { id: number }) {
 		return await Message.findOne(args.id);
